@@ -8,3 +8,32 @@ body > footer {
     font-size: small;
     color: #4d4d4d;
 }
+
+.comment {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    border-bottom: 1px solid #aaa;
+
+}
+
+.comment:last-child {
+    border-bottom: 0;
+}
+
+.comment > .name {
+    font-weight: bold;
+}
+
+.comment > .text {
+    margin-left: 1em;
+}
+
+#clear-comments {
+    text-align: center;
+    margin: 0;
+}
+
+#clear-comments .clear.button-primary {
+    background: #F03350;
+    border-color: #F03350;
+}

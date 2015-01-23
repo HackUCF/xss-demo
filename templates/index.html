@@ -7,44 +7,47 @@
 
 <div class="container">
     <article>
-        <h2>Fake first post</h2>
+        <h2>Instructions & details - First Post</h2>
         <p>This post is very fake. The interesting stuff is on the bottom, if you're interested in actually doing
         anything with this vulnerable Flask application!</p>
 
         <p>The comments field below stores and displays all fields unescaped. Enjoy!</p>
     </article>
+
 	<section class="comments">
         <h4>Comments</h4>
         {% if not comments %}
             <p>No comments... yet!</p>
+        {% else %}
+            <form id="clear-comments" action="{{ url_for('clear_comments') }}" method="post">
+                <input class="clear button-primary" value="Clear Comments" type="submit"/>
+            </form>
         {% endif %}
 		{% for comment in comments %}
-			<article>
-				<footer>
-					
-				</footer>
+			<article class="comment">
+				<span class="name">{{ comment.name }} says:</span>
+                <p class="text">{{ comment.comment|safe }}</p>
 			</article>
 		{% endfor %}
 	</section>
-    <form id="new-comment" action="comment" method="post">
-        <legend>Post a comment</legend>
-        <div class="row">
-            <div class="six columns">
-                <label for="name">Name</label>
-                <input class="u-full-width" id="name" name="name" type="text" placeholder="Horrible hacker type of guy"/>
+
+    <form id="new-comment" action="{{ url_for('comment') }}" method="post">
+        <fieldset>
+            <legend>Post a comment</legend>
+            <div class="row">
+                <div class="six columns">
+                    <label for="name">Name</label>
+                    <input class="u-full-width" id="name" name="name" type="text" placeholder="Horrible hacker type of guy"/>
+                </div>
             </div>
-            <div class="six columns">
-                <label for="email">Email</label>
-                <input class="u-full-width" id="email" name="email" type="text" placeholder="ops@hackucf.org"/>
+            <div class="row">
+                <div class="twelve columns">
+                    <label for="comment-text">Comment</label>
+                    <textarea name="comment" id="comment-text" class="u-full-width" cols="30" rows="20" placeholder="This blog sux"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="ten columns">
-                <label for="comment-text">Comment</label>
-                <textarea name="comment" id="comment-text" class="u-full-width" cols="30" rows="20" placeholder="This blog sux"></textarea>
-            </div>
-        </div>
-        <input class="button-primary" type="submit" value="Submit"/>
+            <input class="button-primary" type="submit" value="Submit"/>
+        </fieldset>
     </form>
 </div>
 {% endblock %}
