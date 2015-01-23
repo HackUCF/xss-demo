@@ -1,0 +1,10 @@
+body > header,
+body > footer {
+    text-align: center;
+}
+
+body > footer {
+    text-align: center;
+    font-size: small;
+    color: #4d4d4d;
+}

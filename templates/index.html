@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<header class="container">
+    <h1>Mah blog</h1>
+    <hr/>
+</header>
+
+<div class="container">
+    <article>
+        <h2>Fake first post</h2>
+        <p>This post is very fake. The interesting stuff is on the bottom, if you're interested in actually doing
+        anything with this vulnerable Flask application!</p>
+
+        <p>The comments field below stores and displays all fields unescaped. Enjoy!</p>
+    </article>
+	<section class="comments">
+        <h4>Comments</h4>
+        {% if not comments %}
+            <p>No comments... yet!</p>
+        {% endif %}
+		{% for comment in comments %}
+			<article>
+				<footer>
+					
+				</footer>
+			</article>
+		{% endfor %}
+	</section>
+    <form id="new-comment" action="comment" method="post">
+        <legend>Post a comment</legend>
+        <div class="row">
+            <div class="six columns">
+                <label for="name">Name</label>
+                <input class="u-full-width" id="name" name="name" type="text" placeholder="Horrible hacker type of guy"/>
+            </div>
+            <div class="six columns">
+                <label for="email">Email</label>
+                <input class="u-full-width" id="email" name="email" type="text" placeholder="ops@hackucf.org"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ten columns">
+                <label for="comment-text">Comment</label>
+                <textarea name="comment" id="comment-text" class="u-full-width" cols="30" rows="20" placeholder="This blog sux"></textarea>
+            </div>
+        </div>
+        <input class="button-primary" type="submit" value="Submit"/>
+    </form>
+</div>
+{% endblock %}
