@@ -1,5 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, request
 import sqlite3
+
+from flask import Flask, render_template, redirect, url_for, request
+
 
 _conn = sqlite3.connect('db.sqlite3')
 _conn.execute('create table if not exists comment (id integer primary key, name TEXT, comment TEXT)')
@@ -9,9 +11,10 @@ app = Flask(__name__)
 
 
 class Comment(object):
-    def __init__(self, name, comment):
+    def __init__(self, name, text):
         self.name = name
-        self.comment = comment
+        self.comment = text
+
 
 @app.route('/')
 def index():
@@ -42,9 +45,9 @@ def comment():
 
     return redirect(url_for('index'))
 
+
 @app.route('/clear-comments', methods=['POST'])
 def clear_comments():
-
     conn = sqlite3.connect('db.sqlite3')
     with conn:
         # not sqli, just xss :P
@@ -54,6 +57,7 @@ def clear_comments():
     conn.close()
 
     return redirect(url_for('index'))
+
 
 if __name__ == "__main__":
     app.debug = True
