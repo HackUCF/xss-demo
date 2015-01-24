@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sqlite3
 
 from flask import Flask, render_template, redirect, url_for, request
@@ -50,7 +52,6 @@ def comment():
 def clear_comments():
     conn = sqlite3.connect('db.sqlite3')
     with conn:
-        # not sqli, just xss :P
         conn.execute('delete from comment')
 
     conn.commit()
