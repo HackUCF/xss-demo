@@ -48,7 +48,7 @@ def comment():
     return redirect(url_for('index'))
 
 
-@app.route('/clear-comments', methods=['POST'])
+@app.route('/clear-comments', methods=['GET', 'POST'])
 def clear_comments():
     conn = sqlite3.connect('db.sqlite3')
     with conn:
